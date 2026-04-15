@@ -1,10 +1,20 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+import sys
 
+def get_resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS   # used by PyInstaller
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+    file_path = get_resource_path("data/main_dataset.csv")
 # ---------------- LOAD DATA ----------------
 def load_data():
-    df = pd.read_csv("data/main_dataset.csv")
-    return df
+   df = pd.read_csv(get_resource_path("data/main_dataset.csv"))
+   return df
 
 
 # ---------------- TRANSFORM DATA ----------------
